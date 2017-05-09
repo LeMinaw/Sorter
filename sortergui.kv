@@ -1,0 +1,105 @@
+<MainScreen>:
+    orientation: "vertical"
+    padding: 10
+
+    fileSelector: fileSelector
+    ponderationInput: ponderationInput
+    transposeInput: transposeInput
+    thresholdInput: thresholdInput
+    alternativeThresholdInput: alternativeThresholdInput
+    alternativeReverseInput: alternativeReverseInput
+    maxChunkSizeRangeInput: maxChunkSizeRangeInput
+    threadsInput: threadsInput
+    # nameInput: nameInput
+    progressBar: progressBar
+
+    Label:
+        size_hint_y: 0.1
+        text: "Sélectionnez un ou plusieurs fichiers :"
+
+    FileChooserListView:
+        id: fileSelector
+        size_hint_y: 0.2
+        multiselect: True
+
+
+    Label:
+        size_hint_y: 0.1
+        text: "Paramétrez les options de génération :"
+
+    GridLayout:
+        size_hint_y: 0.3
+        cols: 2
+
+        Label:
+            text: "Pondération :"
+
+        TextInput:
+            id: ponderationInput
+            multiline: False
+            text: "all"
+
+        Label:
+            text: "Transposition verticale :"
+
+        CheckBox:
+            id: transposeInput
+
+        Label:
+            text: "Seuil :"
+
+        TextInput:
+            id:thresholdInput
+            multiline: False
+            text: "200"
+            input_filter: 'int'
+
+        Label:
+            text: "Seuil de détection alternatif :"
+
+        CheckBox:
+            id: alternativeThresholdInput
+
+        Label:
+            text: "Inversion alternative des tronçons :"
+
+        CheckBox:
+            id: alternativeReverseInput
+
+        Label:
+            text: "Intervalle de la taille de tronçon maximale :"
+
+        TextInput:
+            id:maxChunkSizeRangeInput
+            multiline: False
+            text: "None"
+
+        Label:
+            text: "Nombre de threads :"
+
+        TextInput:
+            id:threadsInput
+            multiline: False
+            text: "8"
+            input_filter: 'int'
+
+        # Label:
+        #     text: "Nom du rendu :"
+        #
+        # TextInput:
+        #     id: nameInput
+        #     multiline: False
+        #     text: ""
+        #     hint_text: "Vierge: nom d'entrée"
+
+    ProgressBar:
+        id: progressBar
+        size_hint_y: (0.1)
+        max: 100
+
+    Button:
+        size_hint: (0.5, 0.1)
+        text: "LANCER LE CALCUL"
+        font_size: 16
+        pos_hint: {'right':0.75}
+        on_press: root.compute()
