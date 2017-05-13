@@ -41,8 +41,6 @@ class MainScreen(BoxLayout):
         """Main computing fuction."""
         images = [Image.open(path.join(self.fileSelector.path, selectedItems)) for selectedItems in self.fileSelector.selection]
 
-        print("TYPE " + str(type(images[0])))
-
         Clock.schedule_once(lambda dt: self.updateProgress(5)) # NOTE: PBar
 
         kwargs = [{
@@ -56,12 +54,14 @@ class MainScreen(BoxLayout):
             'name':                 self.fileSelector.selection[i]
         } for i, image in enumerate(images)]
 
+        sort(**kwargs[0])
+
         Clock.schedule_once(lambda dt: self.updateProgress(10)) # NOTE: PBar
 
-        pool = Pool(int(self.threadsInput.text))
-        pool.map_async(sort, kwargs)
-        pool.close()
-        pool.terminate()
+        # pool = Pool(int(self.threadsInput.text))
+        # pool.starmap(sort, kwargs)
+        # pool.close()
+        # pool.terminate()
 
         Clock.schedule_once(lambda dt: self.updateProgress(100)) # NOTE: PBar
 
