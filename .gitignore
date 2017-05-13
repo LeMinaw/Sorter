@@ -137,3 +137,8 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+*.png
+*.jpg
+*.gif
+*.mp4
+*.avi
