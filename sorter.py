@@ -3,17 +3,15 @@
 """Sorter.py \n
 Quite hackable pixel sorter."""
 
+# import cProfile
+
 from PIL             import Image, ImageDraw, ImageColor
-from bitstring       import BitArray
-from math            import ceil, sqrt, exp
+from math            import exp
 from multiprocess    import Pool
 from itertools       import chain
 from time            import clock
 from random          import random, randint
 from os              import close, listdir
-from copy            import copy, deepcopy
-
-import cProfile
 
 
 NORMALIZED_HUE = lambda px: hue(normalize(px))
@@ -113,7 +111,8 @@ def computeLine(data, width, y, threshold=None, alternativeThreshold=False, alte
 
     lineData = data[y*width : (y+1)*(width)]
 
-    if ponderation != None and max(ponderation) != min(ponderation): # If there's a significant ponderation, we modify the key callable to take care of it.
+    # If there's a significant ponderation, we modify the key callable to take care of it.
+    if ponderation != None and max(ponderation) != min(ponderation):
         pondKey = lambda px: key(multPix(px, ponderation))
     else:
         pondKey = key
@@ -213,7 +212,7 @@ if __name__ ==  '__main__':
 
     # images = [Image.open(f) for f in listdir('.') if f.endswith('jpg')]
 
-    f = "e.jpg"
+    f = "d.jpg"
     image = Image.open(f)
 
 
@@ -228,7 +227,7 @@ if __name__ ==  '__main__':
 
     kwargs = [{
         'image': image,
-        'key': lambda px: saturation(normalize(px)),
+        'key': lambda px: hue(normalize(px)),
         'ponderation': (random()-.5, random()-.5, random()-.5),
         'transpose': randBool(),
         'threshold': randint(0, 400),
@@ -243,11 +242,7 @@ if __name__ ==  '__main__':
 
 
     pool = Pool(8)
-    pool.map(lambda args: sort(**args), kwargs)
+    pool.map(lambda dic: sort(**dic), kwargs)
     pool.close()
     pool.terminate()
     exit()
-
-
-    # cProfile.run('sort(image, ponderation=B, transpose=True, threshold=150, alternativeThreshold=False, name="test")')
-    # exit()
