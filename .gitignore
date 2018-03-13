@@ -1,3 +1,15 @@
+# =========================
+# Custom Files
+# =========================
+
+demo/
+*.jpg
+*.png
+
+# =========================
+# Python Files
+# =========================
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -44,20 +56,6 @@ nosetests.xml
 coverage.xml
 *,cover
 .hypothesis/
-
-# Translations
-*.mo
-*.pot
-
-# Django stuff:
-*.log
-local_settings.py
-
-# Flask instance folder
-instance/
-
-# Scrapy stuff:
-.scrapy
 
 # Sphinx documentation
 docs/_build/
@@ -134,11 +132,3 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
-
-# Windows shortcuts
-*.lnk
-*.png
-*.jpg
-*.gif
-*.mp4
-*.avi
